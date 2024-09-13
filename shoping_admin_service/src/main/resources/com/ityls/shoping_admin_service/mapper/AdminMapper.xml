@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ityls.shoping_admin_service.mapper.AdminMapper">
+
+    <delete id="deleteAdminAllRole" parameterType="long">
+        DELETE
+        FROM ml_admin_role
+        WHERE aid = #{aid}
+    </delete>
+
+
+    <resultMap id="adminMapper" type="com.ityls.shoping_common.pojo.Admin">
+        <id property="aid" column="aid"></id>
+        <result property="username" column="username"></result>
+        <collection property="roles" column="aid" ofType="com.ityls.shoping_common.pojo.Role">
+            <id property="rid" column="rid"></id>
+            <result property="roleName" column="roleName"></result>
+            <result property="roleDesc" column="roleDesc"></result>
+            <collection property="permissions" column="rid" ofType="com.ityls.shoping_common.pojo.Permission">
+                <id property="pid" column="pid"></id>
+                <result property="permissionName" column="permissionName"></result>
+                <result property="url" column="url"></result>
+            </collection>
+        </collection>
+    </resultMap>
+
+    <select id="findById" parameterType="long" resultMap="adminMapper">
+        SELECT * from ml_admin ma
+                 left join ml_admin_role mar on ma.aid = mar.aid
+                 left join ml_role mr on mar.rid = mr.rid
+                 left join ml_role_permission mrp on mr.rid = mrp.rid
+                 left join ml_permission mp on mrp.pid = mp.pid
+                 where ma.aid = #{aid}
+    </select>
+
+    <select id="findAllPermission" resultType="com.ityls.shoping_common.pojo.Permission" parameterType="string">
+        SELECT
+            DISTINCT ml_permission.*
+        FROM
+            ml_admin
+                LEFT JOIN ml_admin_role
+                          ON ml_admin.aid = ml_admin_role.aid
+                LEFT JOIN ml_role
+                          ON ml_admin_role.rid = ml_role.rid
+                LEFT JOIN ml_role_permission
+                          ON ml_role.rid = ml_role_permission.rid
+                LEFT JOIN ml_permission
+                          ON ml_role_permission.pid = ml_permission.pid
+        WHERE ml_admin.username = #{username}
+    </select>
+
+    <insert id="addRoleToAdmin"   parameterType="long">
+        INSERT INTO ml_admin_role VALUES(#{aid},#{rid});
+    </insert>
+
+</mapper>
