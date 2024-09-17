@@ -18,6 +18,9 @@
         <module>shoping_goods_service</module>
         <module>shoping_manager_api</module>
         <module>shoping_admin_service</module>
+        <module>shoping_file_service</module>
+        <module>shoping_category_service</module>
+        <module>shoping_category_customer_api</module>
     </modules>
 
     <properties>

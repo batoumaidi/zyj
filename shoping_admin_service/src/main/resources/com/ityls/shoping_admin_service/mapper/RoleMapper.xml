@@ -24,7 +24,7 @@
         <id property="rid" column="rid"></id>
         <result property="roleName" column="roleName"></result>
         <result property="roleDesc" column="roleDesc"></result>
-        <collection property="permissions" column="rid" ofType="com.ityls.shoping_common.pojo.Permission">
+        <collection property="permissions" ofType="com.ityls.shoping_common.pojo.Permission">
             <id property="pid" column="pid"></id>
             <result property="permissionName" column="permissionName"></result>
             <result property="url" column="url"></result>

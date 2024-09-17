@@ -50,7 +50,8 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     public Page<Admin> search(int page, int size) {
-        return adminMapper.selectPage(new Page(page,size),null);
+        Page page1 = new Page(page, size);
+        return adminMapper.selectPage(page1,null);
     }
 
     @Override

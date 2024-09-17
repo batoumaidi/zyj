@@ -5,6 +5,7 @@ import com.ityls.shoping_common.pojo.Role;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+@Mapper
 public interface RoleMapper extends BaseMapper<Role> {
     // 根据id查询角色，包括权限
     Role findById(Long id);

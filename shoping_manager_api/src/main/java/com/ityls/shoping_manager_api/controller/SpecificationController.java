@@ -19,44 +19,28 @@ public class SpecificationController {
     @DubboReference
     private SpecificationService specificationService;
 
-    /**
-     * 新增商品规格
-     * @param specification 商品规格对象
-     * @return 执行结果
-     */
+
     @PostMapping("/add")
     public BaseResult add(@RequestBody Specification specification){
         specificationService.add(specification);
         return BaseResult.ok();
     }
 
-    /**
-     * 修改商品规格
-     * @param specification 商品规格对象
-     * @return 执行结果
-     */
+
     @PutMapping("/update")
     public BaseResult update(@RequestBody Specification specification){
         specificationService.update(specification);
         return BaseResult.ok();
     }
 
-    /**
-     * 删除商品规格
-     * @param ids 规格id数组
-     * @return 执行结果
-     */
+
     @DeleteMapping("/delete")
     public BaseResult delete(Long[] ids){
         specificationService.delete(ids);
         return BaseResult.ok();
     }
 
-    /**
-     * 根据id查询商品规格
-     * @param id 商品规格id
-     * @return 查询结果
-     */
+
     @GetMapping("/findById")
     public BaseResult<Specification> findById(Long id){
         Specification specification = specificationService.findById(id);
@@ -64,9 +48,7 @@ public class SpecificationController {
     }
 
     /**
-     * 分页查询商品规格
-     * @param page 页码
-     * @param size 每页条数
+
      * @return 查询结果
      */
     @GetMapping("/search")
@@ -77,7 +59,6 @@ public class SpecificationController {
 
     /**
      * 查询商品类型下的所有规格
-     * @param id 商品类型id
      * @return 查询结果
      */
     @GetMapping("/findByProductTypeId")
@@ -88,7 +69,6 @@ public class SpecificationController {
 
     /**
      * 新增商品规格项
-     * @param specificationOptions 商品规格项集合
      * @return 执行结果
      */
     @PostMapping("/addOption")
@@ -98,8 +78,6 @@ public class SpecificationController {
     }
 
     /**
-     * 删除商品规格项
-     * @param ids 商品规格项id集合
      * @return 执行结果
      */
     @DeleteMapping("/deleteOption")
